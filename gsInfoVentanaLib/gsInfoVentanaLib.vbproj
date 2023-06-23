@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>elGuille.gsMsg2WndLib</RootNamespace>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Description>Biblioteca de clases para enviar mensajes a ventanas de Windows compilada para .NET 5.0 (net core).
+Revisión del 08-jun-2021</Description>
+    <Version>5.0.0</Version>
+    <PackageReleaseNotes>v5.0.0.0 07-jun-2021 Versión para .NET 5.0
+Revisiones anteriores para .NET Framework 4.8:
+15/Sep/2020 - 18/Mar/2019 - 21/Abr/2006 - 08/Feb/2004
+v4.0.0.3 15-sep-2020</PackageReleaseNotes>
+    <Authors>elGuille</Authors>
+    <Copyright>©Guillermo Som (elGuille), 2002-2006, 2019-2021</Copyright>
+    <FileVersion>5.0.0.2</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="My Project\" />
+  </ItemGroup>
+
+</Project>
