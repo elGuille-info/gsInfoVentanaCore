@@ -13,7 +13,9 @@
 ' v3.0.0.3  08-jun-21   Nuevos iconos y recordar tamaño/posición copiados
 ' v3.0.0.4              Recuerda 3 tamaños/posiciones: General, Ventana del explorador y Visual Studio
 '
-' ©Guillermo Som (elGuille), 2010, 2019-2021
+' Esto es para usar con VS2019 y solo admite hasta .NET 5.0 (05/oct/26)
+'
+' ©Guillermo Som (elGuille), 2010, 2019-2021, 2026
 '------------------------------------------------------------------------------
 Option Strict On
 Option Infer On
