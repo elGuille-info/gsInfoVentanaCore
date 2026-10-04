@@ -1,6 +1,6 @@
 # gsInfoVentana
 
-Versión compilada con Visual Studio 2022, .NET 9.0
+Versión compilada con Visual Studio 2022 y .NET 9.0
 
 
 ## gsInfoVentana
