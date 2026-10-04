@@ -72,10 +72,10 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         labelInfo1.Text = "©Guillermo Som (elGuille), 2010-"
-        If Date.Now.Year > 2021 Then
-            labelInfo1.Text &= Date.Now.Year.ToString
+        If Date.Now.Year > 2026 Then
+            labelInfo1.Text &= Date.Now.Year.ToString()
         Else
-            labelInfo1.Text &= "2021"
+            labelInfo1.Text &= "2026"
         End If
 
         Dim ensamblado As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly
