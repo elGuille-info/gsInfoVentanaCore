@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------------------------
-' InfoVentana
+' gsInfoVentana
 ' Utilidad para capturar la información de la ventana activa
 '
 ' Primera versión                                                   (18/Dic/10)
@@ -14,6 +14,8 @@
 ' v3.0.0.4              Recuerda 3 tamaños/posiciones: General, Ventana del explorador y Visual Studio
 '
 ' Esto es para usar con VS2019 y solo admite hasta .NET 5.0 (05/oct/26)
+'
+' v6.0.0.0  05-oct-26   Actualización para usar con VS2022 y .NET 9.0
 '
 ' ©Guillermo Som (elGuille), 2010, 2019-2021, 2026
 '------------------------------------------------------------------------------
@@ -168,7 +170,15 @@ Public Class Form1
 
         If txtTitulo.Text.Contains("Visual Studio") Then
             cboCopias.Text = "Visual Studio"
+
+            ' Si la ventana tiene el texto File Explorer        (05/Oct/26 00.53))
+            ' (del explorador de Windows) se asigna Ventana
+        ElseIf txtTitulo.Text.Contains("File Explorer") Then
+            cboCopias.Text = "Ventana"
+
         Else
+            ' Esto es lo que ya no funciona, al tener el texto de "File Explorer" en el título de la ventana,
+            ' no se asigna Ventana, sino General
             If cboChildWnd.Items.Count = 0 Then Return
             For i = 0 To cboChildWnd.Items.Count - 1
                 If cboChildWnd.Items(i).ToString().Contains(txtTitulo.Text) Then
@@ -281,7 +291,7 @@ Public Class Form1
     Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
         ' Mostrar acerca de...                                      (15/Sep/20)
         Dim vers = $" v{My.Application.Info.Version} ({FileVersion})"
-        Dim producto = "gsInfoVentana NetCore" ' My.Application.Info.Title
+        Dim producto = "gsInfoVentana para .NET 9.0" ' My.Application.Info.Title
         Dim desc = My.Application.Info.Description
 
 

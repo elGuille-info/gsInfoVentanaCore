@@ -10,7 +10,7 @@ Muestra la información de una ventana y las subventanas (controles).
 Permite cambiar el tamaño y la posición usando valores copiados de otra ventana.
 Recuerda tres tamaños/posición de ventanas.
 Compilado con .NET 9.0.
-Revisión del 5-octubre-2026
+Revisión del 05-octubre-2026
 ´´´
 
 ## gsInfoVentanaLib

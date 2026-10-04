@@ -171,41 +171,108 @@ Public Class cMsg2Wnd
         GetForegroundWindow = MCallback.GetForegroundWindow
     End Function
 
+#Region "Nuevo código para la versión, optimizado por Copilot"
+
+    ' La mejora principal es que la reflexión y FileVersionInfo se ejecutan solamente la primera vez que se llama a Version().
+    ' También se elimina la asignación redundante de versF y se mantiene el formato de salida actual.
+
+
+    Private Shared ReadOnly _version As New Lazy(Of String)(
+    AddressOf ObtenerVersion,
+    System.Threading.LazyThreadSafetyMode.ExecutionAndPublication)
+
     ''' <summary>
-    ''' Devuelve la versión de esta DLL
+    ''' Devuelve la versión de esta DLL.
+    ''' El resultado se calcula una sola vez.
     ''' </summary>
-    ''' <remarks>15/Sep/2020</remarks>
     Public Shared Function Version() As String
-        Dim t = GetType(cMsg2Wnd)
-        Dim ensamblado = t.Assembly
-        Dim fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(ensamblado.Location)
-
-        ' Esto no da el valor correcto
-        Dim versionAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyVersionAttribute), False)
-        Dim vers = If(versionAttr.Length > 0,
-                                (TryCast(versionAttr(0), System.Reflection.AssemblyVersionAttribute)).Version,
-                                "5.0.0.0")
-
-        Dim fileVerAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyFileVersionAttribute), False)
-        Dim versF = If(fileVerAttr.Length > 0,
-                                (TryCast(fileVerAttr(0), System.Reflection.AssemblyFileVersionAttribute)).Version,
-                                "5.0.0.0")
-        versF = fvi.FileVersion
-        Dim prodAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyProductAttribute), False)
-        Dim producto = If(prodAttr.Length > 0,
-                                (TryCast(prodAttr(0), System.Reflection.AssemblyProductAttribute)).Product,
-                                "gsInfoVentanaLib")
-        ' Producto
-        'producto = fvi.ProductName
-        ' Título
-        producto = fvi.FileDescription
-        Dim descAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyDescriptionAttribute), False)
-        Dim desc = If(descAttr.Length > 0,
-                                (TryCast(descAttr(0), System.Reflection.AssemblyDescriptionAttribute)).Description,
-                                "(última revisión del 07/Jun/2021)")
-        Return $"{producto} v{vers} ({versF}){vbCrLf}{desc}"
-
+        Return _version.Value
     End Function
+
+    Private Shared Function ObtenerVersion() As String
+        Dim ensamblado = GetType(cMsg2Wnd).Assembly
+        Dim versionAssembly = ensamblado.GetName().Version
+        Dim version As String = If(versionAssembly Is Nothing,
+                               "6.0.0.0",
+                               versionAssembly.ToString())
+
+        Dim versionArchivo As String = version
+        Dim descripcionArchivo As String = String.Empty
+
+        If Not String.IsNullOrEmpty(ensamblado.Location) AndAlso
+       System.IO.File.Exists(ensamblado.Location) Then
+
+            Dim informacionArchivo =
+            System.Diagnostics.FileVersionInfo.GetVersionInfo(ensamblado.Location)
+
+            If Not String.IsNullOrEmpty(informacionArchivo.FileVersion) Then
+                versionArchivo = informacionArchivo.FileVersion
+            End If
+
+            descripcionArchivo = informacionArchivo.FileDescription
+        End If
+
+        Dim productoAttr = ensamblado.GetCustomAttributes(
+        GetType(System.Reflection.AssemblyProductAttribute),
+        False)
+
+        Dim producto = If(productoAttr.Length > 0,
+                      DirectCast(productoAttr(0),
+                                 System.Reflection.AssemblyProductAttribute).Product,
+                      "gsInfoVentanaLib")
+
+        If Not String.IsNullOrEmpty(descripcionArchivo) Then
+            producto = descripcionArchivo
+        End If
+
+        Dim descripcionAttr = ensamblado.GetCustomAttributes(
+        GetType(System.Reflection.AssemblyDescriptionAttribute),
+        False)
+
+        Dim descripcion = If(descripcionAttr.Length > 0,
+                         DirectCast(descripcionAttr(0),
+                                    System.Reflection.AssemblyDescriptionAttribute).Description,
+                         "(última revisión del 05/Oct/2026)")
+
+        Return $"{producto} v{version} ({versionArchivo}){vbCrLf}{descripcion}"
+    End Function
+#End Region
+
+    '''' <summary>
+    '''' Devuelve la versión de esta DLL
+    '''' </summary>
+    '''' <remarks>15/Sep/2020</remarks>
+    'Public Shared Function Version() As String
+    '    Dim t = GetType(cMsg2Wnd)
+    '    Dim ensamblado = t.Assembly
+    '    Dim fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(ensamblado.Location)
+
+    '    ' Esto no da el valor correcto
+    '    Dim versionAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyVersionAttribute), False)
+    '    Dim vers = If(versionAttr.Length > 0,
+    '                            (TryCast(versionAttr(0), System.Reflection.AssemblyVersionAttribute)).Version,
+    '                            "6.0.0.0")
+
+    '    Dim fileVerAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyFileVersionAttribute), False)
+    '    Dim versF = If(fileVerAttr.Length > 0,
+    '                            (TryCast(fileVerAttr(0), System.Reflection.AssemblyFileVersionAttribute)).Version,
+    '                            "6.0.0.0")
+    '    versF = fvi.FileVersion
+    '    Dim prodAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyProductAttribute), False)
+    '    Dim producto = If(prodAttr.Length > 0,
+    '                            (TryCast(prodAttr(0), System.Reflection.AssemblyProductAttribute)).Product,
+    '                            "gsInfoVentanaLib")
+    '    ' Producto
+    '    'producto = fvi.ProductName
+    '    ' Título
+    '    producto = fvi.FileDescription
+    '    Dim descAttr = ensamblado.GetCustomAttributes(GetType(System.Reflection.AssemblyDescriptionAttribute), False)
+    '    Dim desc = If(descAttr.Length > 0,
+    '                            (TryCast(descAttr(0), System.Reflection.AssemblyDescriptionAttribute)).Description,
+    '                            "(última revisión del 05/Oct/2026)")
+    '    Return $"{producto} v{vers} ({versF}){vbCrLf}{desc}"
+
+    'End Function
 
     ''' <summary>
     ''' Posiciona y asigna el tamaño a la ventana indicada por el Handle.
