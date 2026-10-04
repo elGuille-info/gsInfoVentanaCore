@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows7.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>gsInfoVentana</RootNamespace>
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
@@ -21,8 +21,8 @@ v2.0.0.10 26-abr-2021</PackageReleaseNotes>
     <Description>Muestra la información de una ventana y las subventanas (controles).
 Permite cambiar el tamaño y la posición usando valores copiados de otra ventana.
 Recuerda tres tamaños/posición de ventanas.
-Compilado con .NET 5.0 (net core).
-Revisión del 8-junio-2021</Description>
+Compilado con .NET 9.0.
+Revisión del 6-octubre-2026</Description>
     <Copyright>©Guillermo Som (elGuille), 2010, 2019-2021, 2026</Copyright>
     <PackageIcon>app.ico-infoVentanas.png</PackageIcon>
     <PackageIconUrl />

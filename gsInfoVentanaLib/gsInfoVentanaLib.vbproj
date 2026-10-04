@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>elGuille.gsMsg2WndLib</RootNamespace>
-    <TargetFramework>net9.0-windows7.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Description>Biblioteca de clases para enviar mensajes a ventanas de Windows compilada para .NET 9.0.
 Revisión del 05-oct-2026</Description>
