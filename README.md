@@ -1,22 +1,27 @@
 # gsInfoVentana
 
-Versi髇 compilada con Visual Studio 2022 y .NET 9.0
+Versi贸n compilada con Visual Studio 2022 y .NET 9.0
 
 
 ## gsInfoVentana
 
 
 ```
-Muestra la informaci髇 de una ventana y las subventanas (controles).
-Permite cambiar el tama駉 y la posici髇 usando valores copiados de otra ventana.
-Recuerda tres tama駉s/posici髇 de ventanas.
+Muestra la informaci贸n de una ventana y las subventanas (controles).
+Permite cambiar el tama帽o y la posici贸n usando valores copiados de otra ventana.
+Recuerda tres tama帽os/posici贸n de ventanas.
 Compilado con .NET 9.0.
-Revisi髇 del 05-octubre-2026
+Revisi贸n del 05-octubre-2026
 ```
 
 ## gsInfoVentanaLib
 
 ```
 Biblioteca de clases para enviar mensajes a ventanas de Windows compilada para .NET 9.0.
-Revisi髇 del 05-oct-2026
+Revisi贸n del 05-oct-2026
 ```
+
+
+## Nota
+
+Antes se llamaba gsVentanaCore cuando lo compil茅 con VS2019 y .NET 5.0 a partir de la versi贸n para .NET Framework 4.8
